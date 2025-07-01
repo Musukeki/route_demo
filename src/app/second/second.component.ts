@@ -1,3 +1,4 @@
+import { ExampleService } from './../@service/example.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class SecondComponent {
 
+  constructor( private exampleService: ExampleService ) {}
+
+  ngOnInit(): void {
+    let secondPageGetData = this.exampleService.firstPageData;
+    console.log(secondPageGetData);
+  }
 }

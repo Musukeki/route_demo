@@ -1,5 +1,7 @@
+// import { routes } from './../../../node_modules/@angular/router/router_module.d-Bx9ArA6K.d';
+import { ExampleService } from './../@service/example.service';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-first',
@@ -9,4 +11,15 @@ import { RouterOutlet } from '@angular/router';
 })
 export class FirstComponent {
 
+  constructor(
+    private exampleService: ExampleService,
+    private router: Router
+  ) {
+
+  }
+
+  goSecond() {
+    this.exampleService.firstPageData = 'first 頁面要存放到 service 的資料內容';
+    this.router.navigateByUrl('/second')
+  }
 }

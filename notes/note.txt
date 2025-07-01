@@ -71,3 +71,66 @@ export const routes: Routes = [
 // ------ 資料傳遞 ------ //
 
 建立 service
+建議新增一個資料夾來放建立的 service，因為專案通常不會只有一個 service 檔案(正常會將功能切分開來)，所以在專案的 src 資料夾中建立 @service資料夾 並新增一個 example.service.ts，可透過指令新增(ng generate service 資料夾名稱/檔案名稱(不需加 service.ts，系統會自動加)/縮寫為 ng g s ...)
+// cmd
+指令範例: ng g s @service/example
+
+建立完 example.service.ts 之後，檔案內容預設如下:
+// example.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExampleService { // ExampleService 可自行命名，但建議和檔案名稱一樣
+
+  constructor() { }
+}
+
+此時可以在 service 裡面宣告一個變數，並且變數名稱和需要傳遞的值相同(不一定要相同但好辨識)
+PS: service 通常用來存放共用的東西
+
+下方程式碼寫法固定(通常不會更改)，作用是告訴系統這支 ts 是大家共用的，換句話說，有寫這段內容才可以每個頁面都使用這支 ts 檔案
+// example.service.ts
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+
+假設要將第一個畫面的資料存放在 example.service 中，此時需要在 class ExampleService 中宣告一個全域變數，目的是用來存放第一個畫面的資料
+firstPageData!: string; (要存放第一個頁面資料的全域變數，並且設定資料型別為字串，預設沒有內容)
+
+因為要存放的是第一個頁面(first)的資料，所以需要在第一個頁面的元件全域中 新增建構式(constructor)並設定要使用的服務，如下:
+// first.component.ts
+constructor(private exampleService: ExampleService) {}
+
+PS: constructor 起手式: constructor(private(固定加上) 自己命名的全域變數(表示該全域變數等於後方冒號接的套件或服務，開頭小寫): 要使用的套件/服務的名稱)
+
+前面有提到 example.service 中，有宣告一個全域變數用來存放第一個頁面的資料，此時把第一頁的資料存放到 service 的做法如下:
+// 切換頁面的按鈕
+<button (click)="goSecond()">Go Second Page</button>
+
+// 點擊時觸發切換頁面的函式
+goSecond() {
+  this.router.navigateByUrl('/second')
+}
+
+此時在函式 goSecond 函式中設定要存放資料的全域變數 = 要存入的值(資料)
+goSecond() {
+  this.exampleService.firstPageData = 'first 頁面要存放到 service 的資料內容'
+  this.router.navigateByUrl('/second')
+}
+
+將資料存入 service(ExampleService 中宣告用來存放資料的全域變數 firstPageData) 後，接著要在第二個頁面將全域變數中存放的資料取出
+此時因為第二頁也需要使用服務(ExampleService)，所以也需要在第二頁(second.component.ts)加入建構式(constructor)設定，如下:
+// second.component.ts
+export class SecondComponent {
+  constructor( private exampleService: ExampleService ) {}
+}
+PS: 要使用該服務的頁面，都需要加入建構式設定
+
+要抓取存放的資料，通常會寫在 ngOnInit 裡面，因此會在第二個頁面的 ts 檔案元件中新增一個 ngOnInit 來宣告一個區域變數，並將該區域變數的值設定為 ExampleService 服務中宣告的全域變數(已存放資料的全域變數)
+// second.component.ts
+ngOnInit(): void {
+  let secondPageGetData = this.exampleService.firstPageData;
+}
