@@ -1,0 +1,18 @@
+<!-- track $index 是 Angular 用來減輕畫面的系統負擔，track 寫法固定，$index 代表唯一值(某筆資料在陣列中的哪個索引位置) -->
+<!-- 如果兩層以上 @for 需要使用到 $index，就在後方宣告一個變數來等於這層 @for 迴圈所用到的 $index，目的是避免和內層的 @for 所用到的 $index 因為名稱相同而無法分辨 -->
+@for (item of arrData; track $index; let i = $index) {
+  <!-- 以下兩者結果相同 -->
+  <p>{{ item }} 索引位置為 {{ $index }}</p>
+  <p>{{ item }} 索引位置為 {{ i }}</p>
+}
+
+<!-- Angular html 中的 @for 操作 -->
+@for(item1 of arr2; track $index; let i = $index) {
+  <h3>姓名：{{ item1.name }}</h3>
+  <ul>
+    @for (item2 of item1.props; track $index; let x = $index) {
+      <li>道具：{{ item2.propName }}</li>
+      <li>數量：{{ item2.amount }}</li>
+    }
+  </ul>
+}
