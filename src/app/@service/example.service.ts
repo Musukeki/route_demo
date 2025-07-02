@@ -10,8 +10,13 @@ import { Injectable } from '@angular/core';
 // export class 後面接的是這支檔案的名稱
 export class ExampleService {
 
-  firstPageData!: string;
-  userName: any;
+  // firstPageData!: string;
+  // userName: any;
+
+  userNameService!: string;
+  userEmailService!: string;
+  phoneNumberService!: number;
+
 
   constructor() { }
 }

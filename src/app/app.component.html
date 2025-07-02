@@ -1,13 +1,13 @@
-<p>app.component.html 的畫面(不會因為切換畫面而改變)</p>
+<!-- <p>app.component.html 的畫面(不會因為切換畫面而改變)</p> -->
 
 <!-- html 導航 -->
-<a routerLink="/first">前往 First</a>
+<!-- <a routerLink="/first">前往 First</a>
 <br>
 <a routerLink="/second">前往 Second</a>
 <br>
 <br>
 <button routerLink="/first" routerLinkActive="firstPageCss">前往 first</button>
-<button routerLink="/second" routerLinkActive="secondPageCss">前往 second</button>
+<button routerLink="/second" routerLinkActive="secondPageCss">前往 second</button> -->
 
 <!-- TypeScript 程式切換 -->
 <!-- 作法 1 -->
@@ -16,7 +16,7 @@
 <button (click)="checkOutToSecond()">前往 second</button> -->
 
 <!-- 作法 2 -->
-<button (click)="checkTo('/')">返回起始頁面</button>
+<!-- <button (click)="checkTo('/')">返回起始頁面</button>
 <button (click)="checkTo('/first')">前往 first</button>
 <button (click)="checkTo('/second')">前往 second</button>
 <button (click)="checkTo('/first/child-a')">前往 first 的子路由</button>
@@ -24,4 +24,53 @@
 <router-outlet></router-outlet>
 
 <input [(ngModel)]="userEmail" style="background-color: aqua;">
-<app-second [userEmail_input]="userEmail" style="background-color: aqua;"></app-second>
+<app-second [userEmail_input]="userEmail" style="background-color: aqua;"></app-second> -->
+
+
+<!-- ! input output -->
+
+<!-- <h3>職業選擇</h3>
+<button (click)="checkToJob('/first')">法師</button>
+<button (click)="checkToJob('second')">戰士</button>
+<button>坦克</button>
+<p>以下內容是這頁本身的內容</p>
+------------------------------------
+<p>以下內容是組件內容</p>
+<router-outlet></router-outlet> -->
+
+
+<!-- let i = $index 可視需求使用 -->
+<!-- @for (data of arr; track $index; let i = $index) { -->
+<!-- 以下兩種結果相同 -->
+<!-- <h3>{{ data }} 位置在: {{ $index }}</h3>
+  <h3>{{ data }} 位置在: {{ i }}</h3>
+} -->
+
+<!-- <div class="playerA">
+  <h3>{{  }}</h3>
+  <p>擁有道具:</p>
+  <ul>
+    <li></li>
+  </ul>
+</div>
+
+<div class="playerB">
+  <h3>玩家B</h3>
+  <p>擁有道具:</p>
+  <ul>
+    <li></li>
+  </ul>
+</div> -->
+
+<!-- @for (data of userArray; track $index) {
+  <div style="border: 2px solid #000; width: 250px; padding: 12px;">
+    <h3 style="text-align: center;">{{ data.userName }}</h3>
+    <p>擁有道具</p>
+    <ol>
+  @for (item of data.props; track $index) {
+      <li>{{ item.propsName }} 數量: {{ item.amount }}</li>
+  }
+    </ol>
+  </div>
+  <br>
+} -->

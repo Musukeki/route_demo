@@ -18,11 +18,19 @@ export class FirstComponent {
   ) {}
 
   userName!: string;
+  userEmail!: string;
+  phoneNumber!: number;
 
-  goSecond() {
-    this.exampleService.firstPageData = 'first 頁面要存放到 service 的資料內容';
-    this.router.navigateByUrl('/second')
-
-    this.exampleService.userName = this.userName;
+  checkToNext() {
+    this.exampleService.userNameService = this.userName;
+    this.exampleService.userEmailService = this.userEmail;
+    this.exampleService.phoneNumberService = this.phoneNumber;
   }
+
+  // goSecond() {
+  //   this.exampleService.firstPageData = 'first 頁面要存放到 service 的資料內容';
+  //   this.router.navigateByUrl('/second')
+
+  //   this.exampleService.userName = this.userName;
+  // }
 }

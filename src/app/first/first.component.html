@@ -1,9 +1,29 @@
-<p>我是 first.component.html 的畫面</p>
+<!-- <p>我是 first.component.html 的畫面</p>
 <router-outlet></router-outlet>
 <br>
-<br>
+<br> -->
 <!-- 資料傳遞練習 -->
-<button (click)="goSecond()">Go Second Page</button>
+<!-- <button (click)="goSecond()">Go Second Page</button> -->
 
 <!-- 小練習 -->
-<input type="text" [(ngModel)]="userName">
+<!-- <input type="text" [(ngModel)]="userName"> -->
+
+<!-- <h2>等級計算機(法師)</h2> -->
+
+<ul>
+  <li>
+    使用者名稱：
+    <input type="text" [(ngModel)]="userName">
+  </li>
+  <li>
+    電子信箱：
+    <input type="email" [(ngModel)]="userEmail">
+  </li>
+  <li>
+    手機號碼：
+    <input type="text" [(ngModel)]="phoneNumber">
+  </li>
+  <li>
+    <button (click)="checkToNext()">送出</button>
+  </li>
+</ul>

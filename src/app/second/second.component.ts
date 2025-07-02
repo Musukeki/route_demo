@@ -18,6 +18,13 @@ export class SecondComponent {
   // 宣告一個全域變數，讓他等於 output 輸出方法
   outPutEmit = output<string>();
 
+  job!: string;
+  lev: number = 1;
+  atk: number = 10;
+  def: number = 5;
+
+  inputLev!: number;
+
   ngOnInit(): void {
     // let secondPageGetData = this.exampleService.firstPageData;
     // console.log(secondPageGetData);
@@ -31,5 +38,19 @@ export class SecondComponent {
     // 使用上面宣告的 output 的全域變數中的 emit 方法執行輸出
     // 並且需要將輸出內容寫在()中
     this.outPutEmit.emit('Allen')
+  }
+
+  levUp() {
+    this.lev++
+    this.atk += 3
+    this.def += 2
+  }
+  levDown() {
+    this.lev--
+    this.atk -= 3
+    this.def -= 2
+  }
+  editLev() {
+
   }
 }
