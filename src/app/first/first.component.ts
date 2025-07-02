@@ -24,9 +24,18 @@ export class FirstComponent {
   ) {}
 
   switchView() {
-    this.exampleService.userNameService = this.userName;
-    this.exampleService.userEmailService = this.userEmail;
-    this.exampleService.userPhoneService = this.userPhone;
+    // 作法一
+    // this.exampleService.userNameService = this.userName;
+    // this.exampleService.userEmailService = this.userEmail;
+    // this.exampleService.userPhoneService = this.userPhone;
+    // this.router.navigateByUrl('/second');
+
+    // 作法二
+    this.exampleService.userDataJson = {
+      userNameInJson: this.userName,
+      userEmailInJson: this.userEmail,
+      userPhoneInJson: this.userPhone
+    }
     this.router.navigateByUrl('/second');
   }
 

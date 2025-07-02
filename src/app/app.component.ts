@@ -21,15 +21,15 @@ export class AppComponent {
   }
 
   // 作法 1
-  // checkOutToApp() {
-  //   this.router.navigate(['/'])
-  // }
-  // checkOutToFirst() {
-  //   this.router.navigate(['/first'])
-  // }
-  // checkOutToSecond() {
-  //   this.router.navigate(['/second'])
-  // }
+  checkOutToApp() {
+    this.router.navigate(['/'])
+  }
+  checkOutToFirst() {
+    this.router.navigate(['/first'])
+  }
+  checkOutToSecond() {
+    this.router.navigate(['/second'])
+  }
 
   // 作法 2
   // checkTo(url: string) {
