@@ -71,3 +71,139 @@ export const routes: Routes = [
 // ------ 資料傳遞 ------ //
 
 建立 service
+ng generate component 資料夾名稱/組件名稱
+
+
+要引用的.ts檔案要引用 新創的元件，需要在 要引用的 .ts 檔案 @import + import: [加入要引用的元件名稱]，引用的元件標籤名稱輸入
+
+
+// ----- Angular 雙向綁定 ----- //
+
+1. 元件.ts 檔案 HTML 設定(@Component)中的 import(引用套件)中加入 FormModule，告知系統要使用 ngModel
+2. <input [(ngModel)]="變數名稱(用來接收 input 輸入的值)">
+3.在元件全域宣告一個變數，並且該變數名稱和要接收 [(ngModel)] 值的變數名稱相同，此時 input 輸入的值就會等於全域變數(用來接收 input 輸入的值的變數)的值
+
+// ----- 元件 ------ //
+新增元件(cmd ng g c...) -> A的ts檔案中 import B元件的名稱和
+位置(import { B元件名稱 } from 'B元件的位置路徑') -> 在A的ts檔案中的imports引用元件 -> A的html檔案使用B的元件標籤名稱
+
+// ----- ----- //
+import:要引用的
+imports:該畫面要使用的東西
+
+
+// ----- Angular 路由設定 ----- //
+app.routes.ts 中引用(import) 要設定路由的元件和元件路徑位置
+確認 app.config.ts 確認 providers 中是否有加入 provideRouter 函式並帶入 routes
+-> prociders: [provideRouter(routes)]
+
+定義基本路線
+
+在 app.routes.ts 為路由設定一個陣列(Angular cli 預設已經建立，但尚未設定 path 資料 / 陣列內容每筆為物件格式)
+此時可根據需求加入設定：{ path: '路由名稱(網址顯示的名稱)', component: 該路由(網址)對應的畫面(哪支component.ts 檔案中的 class 名稱) }
+
+將設定的路由加入程式中
+
+透過 HTML: 需要在要使用路由的 ts 檔案中，引用 RouterOutlet、RouterLink、RouterLinkActive 三個模板，並在 HTML 設定(@Component)中的 imports 加入這些模板，表示我要在該畫面使用這些元件
+以 <a> 標籤為例: <a routerLink="要導向的畫面(名稱.component.html)">，只要有引用以上三者元件，所有 HTML 標籤都可以導向，但還是建議用在 <a> 或 <button> 比較符合操作邏輯
+- RouterOutlet: 表示畫面上的 <router-outlet></router-outlet> 標籤，導航的頁面內容(要導向的 component.html 的畫面內容)會在這個標籤放置的位置
+- RouterLink: 讓 HTML 能夠使用 routerLink 的元件，用來指定要導向(切換)的網頁路徑
+- RouterLinkActive: 讓 HTML 能夠使用 RouterLinkActive 元件，這是個 CSS 用法，當頁面跟路徑相同頁面時就會執行該 CSS 設定，因此 RouterLinkActive 需要搭配 RouterLink 一同使用才會生效
+
+透過 TypeScript: 當切換頁面時，需要根據使用者操作或資料變化而改變頁面內容時，就需要在 TS 中用程式去執行切換頁面的動作，首先需要在建構式(constructor)中建立一個 Router 服務，@import 也要引用 Router 才可使用服務
+此時就可以使用 this.router 中的指令去切換頁面，做法有以下兩種:
+ngOnInit() {
+  this.router.navigate(['/該頁面的路徑名稱']); // ex: this.router.navigate(['/firstPageName']) // 1
+  this.router.navigateByUrl(['/該頁面的路徑名稱]); // 2
+}
+PS: 以上寫在 ngOnInit 會使頁面載入時直接觸發，平時宣告在 class 全域即可
+宣告完 Router 的函式後，就可以在想要觸發切換畫面內容的 html 標籤加入觸發方法，以 <button> 為例寫法如下:
+<button (click)="checkOutToFirst">
+export class AppComponent {
+  checkOutToFirst() {
+    this.router.navigate(['/first'])
+  }
+}
+
+子路由(嵌套路由)設定: 想要建立一個根元件以外的元件相關路由，間單說就是想在設定的路由下方新增一層路由(根元件 > first > child)
+// app.routes.ts
+import { ChildAComponent } from './child-a/child-a.component';
+export const routes: Routes = [
+  { path: 'first', component: FirstComponent,
+    children: [
+      { path: 'child-a', component: ChildAComponent } // first 的子路由
+    ]
+  },
+  { path: 'second', component: SecondComponent }
+];
+
+前往子路由頁面: <button (click)="checkTo(/first/child-a)">
+
+因為是 first 下層的子路由，所以如果子路由的畫面要顯示，也需要在 first.component.ts 中的 HTML 設定，在 imports 中加入 RouterOutlet，接著就可以在 first.component.html 中加入 <router-outlet> 標籤來顯示 child-a 的內容
+
+// ------ 資料傳遞 ------ //
+
+建立 service
+建議新增一個資料夾來放建立的 service，因為專案通常不會只有一個 service 檔案(正常會將功能切分開來)，所以在專案的 src 資料夾中建立 @service資料夾 並新增一個 example.service.ts，可透過指令新增(ng generate service 資料夾名稱/檔案名稱(不需加 service.ts，系統會自動加)/縮寫為 ng g s ...)
+// cmd
+指令範例: ng g s @service/example
+
+建立完 example.service.ts 之後，檔案內容預設如下:
+// example.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExampleService { // ExampleService 可自行命名，但建議和檔案名稱一樣
+
+  constructor() { }
+}
+
+此時可以在 service 裡面宣告一個變數，並且變數名稱和需要傳遞的值相同(不一定要相同但好辨識)
+PS: service 通常用來存放共用的東西
+
+下方程式碼寫法固定(通常不會更改)，作用是告訴系統這支 ts 是大家共用的，換句話說，有寫這段內容才可以每個頁面都使用這支 ts 檔案
+// example.service.ts
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+
+假設要將第一個畫面的資料存放在 example.service 中，此時需要在 class ExampleService 中宣告一個全域變數，目的是用來存放第一個畫面的資料
+firstPageData!: string; (要存放第一個頁面資料的全域變數，並且設定資料型別為字串，預設沒有內容)
+
+因為要存放的是第一個頁面(first)的資料，所以需要在第一個頁面的元件全域中 新增建構式(constructor)並設定要使用的服務，如下:
+// first.component.ts
+constructor(private exampleService: ExampleService) {}
+
+PS: constructor 起手式: constructor(private(固定加上) 自己命名的全域變數(表示該全域變數等於後方冒號接的套件或服務，開頭小寫): 要使用的套件/服務的名稱)
+
+前面有提到 example.service 中，有宣告一個全域變數用來存放第一個頁面的資料，此時把第一頁的資料存放到 service 的做法如下:
+// 切換頁面的按鈕
+<button (click)="goSecond()">Go Second Page</button>
+
+// 點擊時觸發切換頁面的函式
+goSecond() {
+  this.router.navigateByUrl('/second')
+}
+
+此時在函式 goSecond 函式中設定要存放資料的全域變數 = 要存入的值(資料)
+goSecond() {
+  this.exampleService.firstPageData = 'first 頁面要存放到 service 的資料內容'
+  this.router.navigateByUrl('/second')
+}
+
+將資料存入 service(ExampleService 中宣告用來存放資料的全域變數 firstPageData) 後，接著要在第二個頁面將全域變數中存放的資料取出
+此時因為第二頁也需要使用服務(ExampleService)，所以也需要在第二頁(second.component.ts)加入建構式(constructor)設定，如下:
+// second.component.ts
+export class SecondComponent {
+  constructor( private exampleService: ExampleService ) {}
+}
+PS: 要使用該服務的頁面，都需要加入建構式設定
+
+要抓取存放的資料，通常會寫在 ngOnInit 裡面，因此會在第二個頁面的 ts 檔案元件中新增一個 ngOnInit 來宣告一個區域變數，並將該區域變數的值設定為 ExampleService 服務中宣告的全域變數(已存放資料的全域變數)
+// second.component.ts
+ngOnInit(): void {
+  let secondPageGetData = this.exampleService.firstPageData;
+}
