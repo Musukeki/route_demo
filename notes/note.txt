@@ -31,8 +31,8 @@ app.routes.ts 中引用(import) 要設定路由的元件和元件路徑位置
 
 將設定的路由加入程式中
 
-透過 HTML: 需要在要使用路由的 ts 檔案中，引用 RouterOutlet、RouterLink、RouterLinkActive 三個模板，並在 HTML 設定(@Component)中的 imports 加入這些模板，表示我要在該畫面使用這些元件
-以 <a> 標籤為例: <a routerLink="要導向的畫面(名稱.component.html)">，只要有引用以上三者元件，所有 HTML 標籤都可以導向，但還是建議用在 <a> 或 <button> 比較符合操作邏輯
+透過 HTML: 需要在要使用路由的 ts 檔案中，引用 RouterOutlet、RouterLink、RouterLinkActive(非必要) 三個模板，並在 HTML 設定(@Component)中的 imports 加入這些模板，表示我要在該畫面使用這些元件
+以 <a> 標籤為例: <a routerLink="要導向的畫面(component.html)">，只要有引用以上三者元件，所有 HTML 標籤都可以導向，但還是建議用在 <a> 或 <button> 比較符合操作邏輯
 - RouterOutlet: 表示畫面上的 <router-outlet></router-outlet> 標籤，導航的頁面內容(要導向的 component.html 的畫面內容)會在這個標籤放置的位置
 - RouterLink: 讓 HTML 能夠使用 routerLink 的元件，用來指定要導向(切換)的網頁路徑
 - RouterLinkActive: 讓 HTML 能夠使用 RouterLinkActive 元件，這是個 CSS 用法，當頁面跟路徑相同頁面時就會執行該 CSS 設定，因此 RouterLinkActive 需要搭配 RouterLink 一同使用才會生效

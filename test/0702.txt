@@ -1,0 +1,27 @@
+1.設定路由的步驟(三個)
+  -為路由設定一個陣列
+  -在陣列中設定路線
+  -把設定的路線加入程式
+
+2.切換頁面的方式(兩種)
+  -HTML(routerLink、href(Angular不建議使用))
+  -TS(使用 Router 服務)
+
+3.使用 router-outlet(ts記得要引入 RouterOutlet)
+
+4.HTML 切換畫面怎麼做?
+  -RouterLink
+
+5.RouterLinkActive 可以單無使用嗎?
+  -不可以，需要搭配 RouterLink
+
+6.當我要使用
+
+9.現在有個服務(example.service.ts)，我在 A 畫面要怎麼宣告?
+  -在建構式中宣告 private exampleService: ExampleService
+
+10.假設服務中有個欄位是 userName，我在 A 畫面的TS要怎麼將我要存放的內容放進去
+  -需要寫在方法中讓系統觸發(this.exampleService.userName = '要存放的內容')
+
+11.承上，我在 B 畫面的TS中，要怎麼把內容出來?
+  -需要寫在方法中讓系統觸發(console.log(this.exampleService.userName))
