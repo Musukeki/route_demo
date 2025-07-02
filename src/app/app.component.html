@@ -1,13 +1,13 @@
-<p>app.component.html 的畫面(不會因為切換畫面而改變)</p>
+<!-- <p>app.component.html 的畫面(不會因為切換畫面而改變)</p> -->
 
 <!-- html 導航 -->
-<a routerLink="/first">前往 First</a>
+<!-- <a routerLink="/first">前往 First</a>
 <br>
 <a routerLink="/second">前往 Second</a>
 <br>
 <br>
 <button routerLink="/first" routerLinkActive="firstPageCss">前往 first</button>
-<button routerLink="/second" routerLinkActive="secondPageCss">前往 second</button>
+<button routerLink="/second" routerLinkActive="secondPageCss">前往 second</button> -->
 
 <!-- TypeScript 程式切換 -->
 <!-- 作法 1 -->
@@ -16,9 +16,9 @@
 <button (click)="checkOutToSecond()">前往 second</button> -->
 
 <!-- 作法 2 -->
-<button (click)="checkTo('/')">返回起始頁面</button>
+<!-- <button (click)="checkTo('/')">返回起始頁面</button>
 <button (click)="checkTo('/first')">前往 first</button>
 <button (click)="checkTo('/second')">前往 second</button>
-<button (click)="checkTo('/first/child-a')">前往 first 的子路由</button>
-
+<button (click)="checkTo('/first/child-a')">前往 first 的子路由</button> -->
+<button (click)="checkToFirst()">前往 First</button>
 <router-outlet></router-outlet>

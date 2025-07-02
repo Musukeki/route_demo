@@ -12,6 +12,10 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
+  checkToFirst() {
+    this.router.navigateByUrl('/first')
+  }
+
   ngOnInit() {
 
   }
@@ -28,7 +32,7 @@ export class AppComponent {
   // }
 
   // 作法 2
-  checkTo(url: string) {
-    this.router.navigate([url])
-  }
+  // checkTo(url: string) {
+  //   this.router.navigate([url])
+  // }
 }
