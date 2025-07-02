@@ -22,3 +22,6 @@
 <button (click)="checkTo('/first/child-a')">前往 first 的子路由</button>
 
 <router-outlet></router-outlet>
+
+<input [(ngModel)]="userEmail" style="background-color: aqua;">
+<app-second [userEmail_input]="userEmail" style="background-color: aqua;"></app-second>
