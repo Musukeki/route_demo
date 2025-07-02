@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 export class ExampleService {
 
   firstPageData!: string;
+  userName: any;
 
   constructor() { }
 }

@@ -11,8 +11,12 @@ export class SecondComponent {
 
   constructor( private exampleService: ExampleService ) {}
 
+  userName!: string;
+
   ngOnInit(): void {
     let secondPageGetData = this.exampleService.firstPageData;
     console.log(secondPageGetData);
+
+    this.userName = this.exampleService.userName
   }
 }
